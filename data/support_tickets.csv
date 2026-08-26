@@ -1,0 +1,302 @@
+ticket_text,category,priority,sentiment
+My payment was deducted but my order was not confirmed. Please help me resolve this.,Billing / Payment,High,Negative
+I was charged twice for the same transaction on my credit card.,Billing / Payment,High,Negative
+Why is there an unexpected extra fee on my monthly invoice?,Billing / Payment,Medium,Negative
+Can you provide a detailed receipt or tax invoice for my recent purchase?,Billing / Payment,Low,Neutral
+My payment method keeps getting declined even though my card has sufficient funds.,Billing / Payment,High,Negative
+How do I update my billing address and payment information on my profile?,Billing / Payment,Low,Neutral
+Unauthorized charge appeared on my account today. I need an immediate investigation!,Billing / Payment,High,Negative
+Is there a discount code available for annual billing plans?,Billing / Payment,Low,Positive
+Payment gateway timed out during checkout but money was debited from bank.,Billing / Payment,High,Negative
+I need to change the credit card attached to my recurring subscription.,Billing / Payment,Medium,Neutral
+My billing cycle renewed early and I was charged ahead of time.,Billing / Payment,High,Negative
+"Thank you for fixing my billing discrepancy so quickly, great service!",Billing / Payment,Low,Positive
+Where can I view all my past transaction receipts?,Billing / Payment,Low,Neutral
+Double deduction for invoice #8921. Reversal requested urgently.,Billing / Payment,High,Negative
+Do you support international wire transfers or PayPal for billing?,Billing / Payment,Low,Neutral
+"I got an email saying my payment failed, but my bank statement shows it went through.",Billing / Payment,High,Negative
+Can I get an invoice with my company VAT number included?,Billing / Payment,Low,Neutral
+Payment failed error code 4002 when trying to purchase the premium plan.,Billing / Payment,Medium,Negative
+Auto-pay charged the wrong credit card. Please reverse it.,Billing / Payment,High,Negative
+I noticed an overcharge on my last billing statement. Please audit.,Billing / Payment,Medium,Negative
+How can I switch my currency from USD to EUR for billing?,Billing / Payment,Low,Neutral
+Urgent: My corporate credit card was charged multiple times for the single user license.,Billing / Payment,High,Negative
+I am wondering if there is an option for quarterly billing instead of annual.,Billing / Payment,Low,Neutral
+Payment transaction pending for over 24 hours. Is it processed?,Billing / Payment,Medium,Neutral
+"The checkout page gave a 504 error during payment, did it go through?",Billing / Payment,High,Negative
+I appreciate your prompt help with clarifying my invoice charges.,Billing / Payment,Low,Positive
+Please remove my expired Mastercard from the payment methods.,Billing / Payment,Low,Neutral
+Money was deducted from my account but my order status shows unpaid.,Billing / Payment,High,Negative
+Are there any hidden transaction fees when paying via credit card?,Billing / Payment,Low,Neutral
+Immediate help needed: billing system charged my account 3 times today!,Billing / Payment,High,Negative
+Can I receive my monthly bills automatically via email as PDF?,Billing / Payment,Low,Neutral
+Refund processed by support was credited to wrong card account.,Billing / Payment,High,Negative
+Payment failed: Your bank has declined the request. What should I do?,Billing / Payment,Medium,Negative
+I want to verify if my payment went through for subscription ID 44321.,Billing / Payment,Low,Neutral
+My promo discount code was not applied during checkout and I was charged full price.,Billing / Payment,Medium,Negative
+I have been trying to log into my account but my password reset isn't working.,Account / Login,Medium,Negative
+My account is locked due to too many failed login attempts. Please unlock it.,Account / Login,High,Negative
+I am not receiving the two-factor authentication (2FA) SMS verification code.,Account / Login,High,Negative
+How do I change the email address associated with my user account?,Account / Login,Low,Neutral
+Someone tried to access my account from an unknown device. I need to secure it immediately.,Account / Login,High,Negative
+Can you merge my two separate accounts into one primary profile?,Account / Login,Low,Neutral
+I forgot my username and security question answers.,Account / Login,Medium,Negative
+How do I enable two-step verification using an authenticator app?,Account / Login,Low,Neutral
+Account verification email link expired. Please resend a fresh link.,Account / Login,Medium,Neutral
+"I cannot log in with Google OAuth, it throws a redirect URI mismatch error.",Account / Login,High,Negative
+Thanks for helping me recover my lost password so fast!,Account / Login,Low,Positive
+"My employee left the company, how do I revoke their account permissions?",Account / Login,High,Neutral
+Unable to sign in. System keeps saying invalid credentials despite correct password.,Account / Login,High,Negative
+How do I change my display name and avatar photo in settings?,Account / Login,Low,Neutral
+Urgent: My admin account got deactivated automatically and team cannot access portal.,Account / Login,High,Negative
+Is it possible to transfer account ownership to another team member?,Account / Login,Medium,Neutral
+I lost my recovery backup codes for two-factor authentication.,Account / Login,High,Negative
+Can I set up single sign-on (SSO) with Okta or Azure Active Directory?,Account / Login,Medium,Neutral
+My account was suspended without any explanation. Please review and restore it.,Account / Login,High,Negative
+I am unable to update my phone number under profile settings.,Account / Login,Low,Negative
+Password reset link sends me to a blank 404 page.,Account / Login,High,Negative
+How can I check the active login sessions and devices connected to my account?,Account / Login,Low,Neutral
+"Session expires too quickly, logging me out every 5 minutes.",Account / Login,Medium,Negative
+Cannot access my dashboard because OTP is sent to an old deactivated number.,Account / Login,High,Negative
+Great job on the new seamless biometric login feature!,Account / Login,Low,Positive
+I want to delete my account permanently and remove all personal data.,Account / Login,Medium,Neutral
+Login page is stuck in an infinite redirect loop.,Account / Login,High,Negative
+Need help setting up role-based access control for my organization team.,Account / Login,Low,Neutral
+"Received a suspicious login alert from another country, please lock access.",Account / Login,High,Negative
+Where can I manage third-party app permissions connected to my account?,Account / Login,Low,Neutral
+"Login failed with error: User account does not exist, but I have an active subscription.",Account / Login,High,Negative
+Can you invite additional team members to my organization workspace?,Account / Login,Low,Neutral
+Password policy requirements are not clearly specified on the reset form.,Account / Login,Low,Neutral
+Urgent: CEO cannot sign in to approve quarterly reports. Please unlock ASAP.,Account / Login,High,Negative
+I love the new simplified multi-factor login process.,Account / Login,Low,Positive
+The web application is throwing 500 internal server error when uploading files.,Technical Issue,High,Negative
+Mobile application crashes immediately upon opening on iOS 17.,Technical Issue,High,Negative
+API endpoint /v1/users is returning 429 Too Many Requests even within rate limit.,Technical Issue,High,Negative
+The search function on the portal is extremely slow and times out.,Technical Issue,Medium,Negative
+Data export to CSV is exporting garbled characters and corrupted headers.,Technical Issue,Medium,Negative
+Webhook notifications are failing to trigger when new events occur.,Technical Issue,High,Negative
+Images are not rendering on the product showcase page.,Technical Issue,Medium,Negative
+Is there a scheduled server downtime or maintenance today?,Technical Issue,Low,Neutral
+"Application UI is broken on Safari browser, buttons are unclickable.",Technical Issue,Medium,Negative
+Database sync error: Changes made on desktop app are not reflecting on mobile.,Technical Issue,High,Negative
+Memory leak detected causing browser tab to freeze after 10 minutes of use.,Technical Issue,High,Negative
+"The latest software patch resolved our performance issues, excellent work!",Technical Issue,Low,Positive
+SSL certificate expired on the subdomain api.service.com.,Technical Issue,High,Negative
+WebSocket connection drops every 30 seconds with error code 1006.,Technical Issue,High,Negative
+PDF generation feature generates completely blank white pages.,Technical Issue,Medium,Negative
+What are the minimum system hardware requirements to run the desktop client?,Technical Issue,Low,Neutral
+Production server down: Entire team unable to access the core workflow system.,Technical Issue,High,Negative
+Bug report: Dark mode toggle does not persist after page refresh.,Technical Issue,Low,Neutral
+Notification bell icon shows unread badge but no notifications load in the list.,Technical Issue,Low,Negative
+CORS policy error blocking requests from our registered domain.,Technical Issue,High,Negative
+File upload size limit is stated as 50MB but rejects 20MB files with 413 error.,Technical Issue,Medium,Negative
+App performance is super snappy after the recent cloud migration update.,Technical Issue,Low,Positive
+Integration with Slack webhook stopped posting updates since yesterday.,Technical Issue,Medium,Negative
+Frontend javascript error Uncaught TypeError: Cannot read property 'map' of undefined.,Technical Issue,High,Negative
+Is there a public status page to monitor API latency and uptime?,Technical Issue,Low,Neutral
+Critical bug: Form submission button enters endless spinning state without feedback.,Technical Issue,High,Negative
+Email notifications are being delayed by up to 4 hours in the queue.,Technical Issue,Medium,Negative
+Our automated scripts fail due to sudden response schema format changes in v2.,Technical Issue,High,Negative
+Audio is stuttering and out of sync during video playback module.,Technical Issue,Medium,Negative
+Where can we download the official Python SDK and documentation?,Technical Issue,Low,Neutral
+System crash: Blue screen error when running heavy report generation module.,Technical Issue,High,Negative
+Responsive layout breaks on tablet screen resolution 768x1024.,Technical Issue,Low,Negative
+"The bug fix rolled out yesterday works flawlessly, thanks for the quick turnaround.",Technical Issue,Low,Positive
+Font rendering is blurry on Windows high-DPI displays.,Technical Issue,Low,Neutral
+Server returned Error 502 Bad Gateway during our daily data synchronization.,Technical Issue,High,Negative
+My package was marked as delivered but I have not received it yet.,Order / Delivery,High,Negative
+Tracking number provided for order #98234 shows invalid on courier website.,Order / Delivery,Medium,Negative
+Can I change my delivery shipping address before the item dispatches?,Order / Delivery,Medium,Neutral
+My order is delayed by over a week past the estimated delivery date.,Order / Delivery,High,Negative
+I received only 1 item out of the 3 items I ordered in package #4512.,Order / Delivery,High,Negative
+Do you offer expedited next-day express shipping to Chicago?,Order / Delivery,Low,Neutral
+The delivery driver left my package in the rain and the box is soaked.,Order / Delivery,High,Negative
+"Package arrived 2 days earlier than expected, wonderful delivery experience!",Order / Delivery,Low,Positive
+What is the expected dispatch time for pre-order merchandise?,Order / Delivery,Low,Neutral
+Courier attempted delivery while I was away. How do I reschedule a delivery slot?,Order / Delivery,Medium,Neutral
+My order has been stuck in 'Processing' status for over 5 business days.,Order / Delivery,High,Negative
+Can I add delivery instructions like 'leave package at back door'?,Order / Delivery,Low,Neutral
+Wrong item delivered! I ordered a blue jacket but received a black hoodie.,Order / Delivery,High,Negative
+How do I track international shipments once they clear customs?,Order / Delivery,Low,Neutral
+Delivery driver demanded extra cash for customs fee which was already paid online.,Order / Delivery,High,Negative
+Can I hold my delivery at the local post office depot for self-pickup?,Order / Delivery,Low,Neutral
+"My package arrived securely packaged and in pristine condition, very satisfied!",Order / Delivery,Low,Positive
+Where is my order? Ordered two weeks ago with no tracking update.,Order / Delivery,High,Negative
+Can I combine two separate pending orders into a single shipment box?,Order / Delivery,Low,Neutral
+Courier marked delivery as 'Customer unavailable' but I was home all day.,Order / Delivery,Medium,Negative
+Estimated delivery date moved back three times. I need this before Friday.,Order / Delivery,High,Negative
+Is signature required upon delivery for high value electronics?,Order / Delivery,Low,Neutral
+Items inside parcel were completely broken due to rough handling during transit.,Order / Delivery,High,Negative
+Do you ship to military APO/FPO addresses?,Order / Delivery,Low,Neutral
+Order confirmation email was never sent to my email inbox.,Order / Delivery,Medium,Negative
+"The tracking map live update is very accurate and convenient, thank you.",Order / Delivery,Low,Positive
+Package was delivered to the wrong apartment number down the street.,Order / Delivery,High,Negative
+Can I request contactless porch drop-off for my upcoming delivery?,Order / Delivery,Low,Neutral
+Shipment has been held at regional distribution hub with no progress for 4 days.,Order / Delivery,Medium,Negative
+What are the shipping rates and estimated arrival times for Canada?,Order / Delivery,Low,Neutral
+Courier lost the parcel in transit according to their support desk.,Order / Delivery,High,Negative
+Is it possible to expedite an order that has already been placed?,Order / Delivery,Medium,Neutral
+Received tracking number but carrier status says 'Label Created' for 6 days.,Order / Delivery,High,Negative
+The packaging was eco-friendly and delivery was on time. Excellent service.,Order / Delivery,Low,Positive
+Can I specify a delivery time window between 6pm and 9pm?,Order / Delivery,Low,Neutral
+The product I purchased stopped turning on after two days of use.,Product Issue,High,Negative
+Missing key accessory components from the retail packaging box.,Product Issue,Medium,Negative
+The device makes a loud buzzing noise whenever plugged into charging.,Product Issue,High,Negative
+How do I configure the advanced wireless connectivity settings on this model?,Product Issue,Low,Neutral
+The material quality is significantly inferior to what was advertised in photos.,Product Issue,Medium,Negative
+Is this product compatible with Windows 11 and macOS Sonoma?,Product Issue,Low,Neutral
+Battery life drains within 45 minutes instead of the advertised 8 hours.,Product Issue,High,Negative
+"This product exceeded my expectations, outstanding build quality and finish!",Product Issue,Low,Positive
+The power button is stuck and doesn't click or register input.,Product Issue,Medium,Negative
+Where can I find the user manual and warranty registration guide?,Product Issue,Low,Neutral
+Screen has dead pixels and visible backlight bleeding out of the box.,Product Issue,High,Negative
+Does this product come with a standard 1-year manufacturer warranty?,Product Issue,Low,Neutral
+Device overheats to dangerous temperatures after 15 minutes of operation.,Product Issue,High,Negative
+Bluetooth pairing fails repeatedly with error 'Device rejected pairing'.,Product Issue,Medium,Negative
+Firmware update failed mid-way and the device is now completely bricked.,Product Issue,High,Negative
+Can I purchase replacement parts or extra batteries directly from you?,Product Issue,Low,Neutral
+"The software integration is super intuitive and smooth, really loving this device.",Product Issue,Low,Positive
+The color delivered is dark grey instead of the silver shown on product page.,Product Issue,Medium,Negative
+Item arrived with a deep scratch across the main display glass.,Product Issue,High,Negative
+How do I perform a factory reset on model PX-500?,Product Issue,Low,Neutral
+Speaker audio is crackling and distorted at volumes above 50%.,Product Issue,Medium,Negative
+Is this gadget water resistant or waterproof for outdoor sports?,Product Issue,Low,Neutral
+"The plastic latch snapped on first use, defective plastic molding.",Product Issue,High,Negative
+Very impressed with the product performance and battery longevity.,Product Issue,Low,Positive
+Device keeps disconnecting randomly from Wi-Fi network every few minutes.,Product Issue,Medium,Negative
+What type of USB cable and power adapter is required for charging?,Product Issue,Low,Neutral
+Sensor calibration is inaccurate and giving wrong measurement readings.,Product Issue,Medium,Negative
+Product stopped functioning right after the latest mandatory firmware update.,Product Issue,High,Negative
+Can I use third-party charging docks without voiding the warranty?,Product Issue,Low,Neutral
+Defective hinge mechanism makes it impossible to close the lid properly.,Product Issue,High,Negative
+The ergonomic design is very comfortable for daily work use.,Product Issue,Low,Positive
+Instruction manual is missing English translations.,Product Issue,Low,Negative
+The cooling fan is rattling loudly like bearings are loose inside.,Product Issue,Medium,Negative
+Does this product support dual voltage 110V-240V for international travel?,Product Issue,Low,Neutral
+Item failed safety inspection due to exposed wiring inside connector.,Product Issue,High,Negative
+I want to cancel my subscription immediately and get a full refund.,Cancellation / Refund,High,Negative
+Please cancel order #88392 as I placed it by mistake.,Cancellation / Refund,High,Neutral
+When will the refund for my returned merchandise reflect in my bank account?,Cancellation / Refund,Medium,Neutral
+I canceled my plan 2 weeks ago but was charged again today. Refund needed urgently!,Cancellation / Refund,High,Negative
+How do I initiate a return and generate a pre-paid return shipping label?,Cancellation / Refund,Medium,Neutral
+What is your return policy window for items purchased during holiday sales?,Cancellation / Refund,Low,Neutral
+"I was promised a refund within 5 business days, but it has been 15 days.",Cancellation / Refund,High,Negative
+Support team processed my cancellation smoothly and issued refund quickly. Thank you!,Cancellation / Refund,Low,Positive
+Can I cancel part of my order without canceling the entire shipment?,Cancellation / Refund,Medium,Neutral
+Return package was delivered to your warehouse 10 days ago. Where is my refund?,Cancellation / Refund,High,Negative
+I want to terminate my enterprise contract early due to poor service quality.,Cancellation / Refund,High,Negative
+Is there a restocking fee deducted for returning opened electronic items?,Cancellation / Refund,Low,Neutral
+Please cancel my auto-renewal before the next billing cycle on the 1st.,Cancellation / Refund,Medium,Neutral
+Refund amount is missing $25. Why was the shipping cost not refunded?,Cancellation / Refund,Medium,Negative
+"I did not authorize this recurring renewal, cancel it and refund immediately!",Cancellation / Refund,High,Negative
+How long does it take for store credit or gift card refunds to be activated?,Cancellation / Refund,Low,Neutral
+"The refund was processed accurately to my original card, thanks for the help.",Cancellation / Refund,Low,Positive
+Cancellation button is greyed out on the billing dashboard page.,Cancellation / Refund,High,Negative
+Can I get a refund if the software does not meet our company requirements?,Cancellation / Refund,Medium,Neutral
+I want to return a defective unit for a replacement or full refund.,Cancellation / Refund,High,Negative
+Please confirm in writing that my subscription has been terminated.,Cancellation / Refund,Medium,Neutral
+Charged after trial period ended without prior notification email. Please refund.,Cancellation / Refund,High,Negative
+What steps do I need to follow to return an item from overseas?,Cancellation / Refund,Low,Neutral
+Immediate refund request: service has been unavailable for 3 days.,Cancellation / Refund,High,Negative
+Can I get a pro-rated refund for the remaining 6 months of my subscription?,Cancellation / Refund,Medium,Neutral
+"The cancellation process was straightforward and hassle-free, appreciated.",Cancellation / Refund,Low,Positive
+Why was my return request rejected? The product is in original sealed box.,Cancellation / Refund,High,Negative
+Need help canceling a pending booking before penalty deadline.,Cancellation / Refund,High,Neutral
+Store credit was issued instead of direct refund to original credit card.,Cancellation / Refund,Medium,Negative
+How do I pause my subscription instead of canceling it completely?,Cancellation / Refund,Low,Neutral
+Refund status shows completed on dashboard but bank has no record of transfer.,Cancellation / Refund,High,Negative
+I would like to cancel my trial before it converts to paid next week.,Cancellation / Refund,Low,Neutral
+Return label QR code provided is not scanning at the postal drop-off kiosk.,Cancellation / Refund,Medium,Negative
+Very pleased with your 30-day money-back guarantee policy fulfillment.,Cancellation / Refund,Low,Positive
+Dispute initiated: Vendor refuses to honor valid return request within 14 days.,Cancellation / Refund,High,Negative
+What are your customer support working hours and response times?,General Inquiry,Low,Neutral
+Do you offer specialized corporate pricing or volume licensing discounts?,General Inquiry,Low,Neutral
+Where is your company headquarters located and do you have local offices?,General Inquiry,Low,Neutral
+I am interested in a partnership opportunity with your business development team.,General Inquiry,Low,Positive
+Are you hiring junior software engineers or AI intern positions currently?,General Inquiry,Low,Neutral
+Where can I read your official terms of service and privacy policy?,General Inquiry,Low,Neutral
+Do you offer live product demonstrations or guided onboarding webinars?,General Inquiry,Low,Positive
+"I really love your product, it has saved our team hours of work every week!",General Inquiry,Low,Positive
+Is your platform GDPR and HIPAA compliant for enterprise health data?,General Inquiry,Medium,Neutral
+How can I submit a feature request or product feedback to your roadmap?,General Inquiry,Low,Neutral
+Can someone from your sales team contact me to discuss enterprise requirements?,General Inquiry,Medium,Neutral
+Do you have student or non-profit organization discounts available?,General Inquiry,Low,Neutral
+What programming languages are supported in your developer API documentation?,General Inquiry,Low,Neutral
+"Fantastic customer service and great user experience overall, keep it up!",General Inquiry,Low,Positive
+Is there a community forum or Discord server for developers?,General Inquiry,Low,Neutral
+"Where can I find your press kit, brand logos, and media guidelines?",General Inquiry,Low,Neutral
+Do you have case studies of how other companies in retail use your tool?,General Inquiry,Low,Neutral
+Are there any upcoming feature releases or major updates scheduled this quarter?,General Inquiry,Low,Neutral
+How do I subscribe or unsubscribe from your monthly product newsletter?,General Inquiry,Low,Neutral
+"Your onboarding documentation is extremely clear and well written, thank you!",General Inquiry,Low,Positive
+Can we schedule a 15-minute introductory discovery call with an account manager?,General Inquiry,Low,Neutral
+"What security certifications (e.g. SOC2 Type II, ISO 27001) does your platform hold?",General Inquiry,Medium,Neutral
+Do you offer affiliate marketing or referral commission programs?,General Inquiry,Low,Neutral
+Is your web application accessible under WCAG 2.1 AA standards for screen readers?,General Inquiry,Low,Neutral
+Just wanted to say your platform has been a game-changer for our workflow!,General Inquiry,Low,Positive
+How can I update my communication preferences for marketing emails?,General Inquiry,Low,Neutral
+Are there video tutorials or certification courses available for new administrators?,General Inquiry,Low,Neutral
+What is the policy on data retention after an account is closed?,General Inquiry,Low,Neutral
+Can we use our own custom domain and branding on the client portal?,General Inquiry,Low,Neutral
+Where can I report a potential security vulnerability responsibly?,General Inquiry,High,Neutral
+I appreciate your team's transparent communication and helpful support staff.,General Inquiry,Low,Positive
+Do you support localization or multi-language interfaces in Spanish and French?,General Inquiry,Low,Neutral
+Is there an offline mode available for the mobile app?,General Inquiry,Low,Neutral
+Can I export all user activity logs for auditing compliance?,General Inquiry,Medium,Neutral
+Thank you for the quick and polite response to my previous inquiry!,General Inquiry,Low,Positive
+I noticed a recurring charge of $49.99 that I did not authorize.,Billing / Payment,High,Negative
+My credit card was charged twice for order 10482. Urgent reversal needed.,Billing / Payment,High,Negative
+How do I download the invoice for last month's subscription payment?,Billing / Payment,Low,Neutral
+Checkout page gave error 'card processing failed'. Please check payment gateway.,Billing / Payment,High,Negative
+Can I get a copy of all my annual tax payment invoices?,Billing / Payment,Low,Neutral
+The subscription price increased without any prior notice or email.,Billing / Payment,Medium,Negative
+Payment confirmation receipt has not been delivered to my mailbox.,Billing / Payment,Medium,Negative
+Do you accept crypto payments or American Express for billing?,Billing / Payment,Low,Neutral
+Locked out of my admin dashboard. Cannot reset password via SMS.,Account / Login,High,Negative
+Can you please help me recover my account after losing 2FA phone?,Account / Login,High,Negative
+How to update the registered email address on my company profile?,Account / Login,Low,Neutral
+Password reset link is not arriving in my inbox or spam folder.,Account / Login,High,Negative
+Suspicious login attempt detected from Russia. Please lock my account now.,Account / Login,High,Negative
+Unable to log in using corporate SSO Microsoft account.,Account / Login,High,Negative
+How can I grant viewer access permissions to my contractor?,Account / Login,Low,Neutral
+"I successfully regained access to my account, thanks for prompt assistance.",Account / Login,Low,Positive
+API throwing 500 error when sending POST requests to /api/v1/tickets.,Technical Issue,High,Negative
+Mobile application keeps crashing on launch after updating to version 3.2.,Technical Issue,High,Negative
+Database connection timed out during data synchronization process.,Technical Issue,High,Negative
+The frontend web portal is not loading on Chrome browser.,Technical Issue,High,Negative
+Search filters are returning zero results even for existing records.,Technical Issue,Medium,Negative
+High latency observed on production server endpoints.,Technical Issue,High,Negative
+CSV export function fails when dataset exceeds 500 rows.,Technical Issue,Medium,Negative
+"Server response time improved significantly with new update, great job!",Technical Issue,Low,Positive
+Tracking says package delivered to porch but nothing is there.,Order / Delivery,High,Negative
+Delivery is delayed by 10 days with no status updates from courier.,Order / Delivery,High,Negative
+Can I change my delivery address for order #54391 before dispatch?,Order / Delivery,Medium,Neutral
+"Received only partial shipment, 2 items missing from package.",Order / Delivery,High,Negative
+"Order arrived in perfect condition right on time, excellent delivery!",Order / Delivery,Low,Positive
+"Package was damaged in transit, box was crushed and contents broken.",Order / Delivery,High,Negative
+Where is my shipment? Tracking status has been stuck on 'In Transit' for 8 days.,Order / Delivery,High,Negative
+How do I schedule an evening delivery slot for my pending parcel?,Order / Delivery,Low,Neutral
+Device hardware power button is completely broken and unresponsive.,Product Issue,High,Negative
+The battery runs out in less than 1 hour of normal use.,Product Issue,High,Negative
+Does this hardware device support dual-band 5GHz Wi-Fi networks?,Product Issue,Low,Neutral
+Unit stopped working after 3 days of light usage.,Product Issue,High,Negative
+Bluetooth disconnects every 2 minutes while streaming audio.,Product Issue,Medium,Negative
+"High quality product and very sleek design, highly recommended!",Product Issue,Low,Positive
+Where can I download the driver installation package for Windows?,Product Issue,Low,Neutral
+Screen display shows vertical colored lines and flickers continuously.,Product Issue,High,Negative
+Cancel my subscription immediately and issue a full refund to my bank.,Cancellation / Refund,High,Negative
+"I returned the parcel last week, when will my refund be credited?",Cancellation / Refund,Medium,Neutral
+"Accidentally ordered wrong item, please cancel order #77124 before shipping.",Cancellation / Refund,High,Neutral
+Charged again after canceling account last month. Refund needed right away.,Cancellation / Refund,High,Negative
+How do I initiate a return request and get a shipping barcode?,Cancellation / Refund,Medium,Neutral
+The return process was smooth and money refunded within 24 hours. Thanks!,Cancellation / Refund,Low,Positive
+Why was only a partial refund issued when I returned all items in original condition?,Cancellation / Refund,High,Negative
+I want to terminate my auto-billing renewal before next cycle.,Cancellation / Refund,Medium,Neutral
+What are your standard support operating hours during weekends?,General Inquiry,Low,Neutral
+Do you offer corporate volume discounts for teams over 50 users?,General Inquiry,Low,Neutral
+Is your software compliant with SOC2 and ISO 27001 data security standards?,General Inquiry,Medium,Neutral
+Where can I submit feedback and feature ideas for the upcoming release?,General Inquiry,Low,Neutral
+"We love using your platform, it has made our team much more productive!",General Inquiry,Low,Positive
+Can I get a copy of your enterprise Master Services Agreement (MSA)?,General Inquiry,Low,Neutral
+Do you have documentation guides for integrating with custom third party CRM?,General Inquiry,Low,Neutral
+How can our non-profit organization apply for a discount license?,General Inquiry,Low,Neutral

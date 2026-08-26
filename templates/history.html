@@ -1,0 +1,271 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <!-- Header -->
+    <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-4 gap-3">
+        <div>
+            <h2 class="fw-bold mb-1">
+                <i class="fa-solid fa-clock-rotate-left text-azure me-2"></i>Ticket History Log
+            </h2>
+            <p class="text-muted mb-0">Audit and search all previously classified support tickets stored in SQLite database.</p>
+        </div>
+        <a href="{{ url_for('analyze') }}" class="btn btn-primary rounded-pill px-4 shadow-sm">
+            <i class="fa-solid fa-plus me-1"></i> Analyze New Ticket
+        </a>
+    </div>
+
+    <!-- Filter & Search Card -->
+    <div class="card border-0 shadow-sm rounded-3 mb-4">
+        <div class="card-body p-3">
+            <form method="GET" action="{{ url_for('history') }}" class="row g-2 align-items-center">
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0 text-muted"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="text" name="search" class="form-control border-start-0" placeholder="Search ticket text..." value="{{ search }}">
+                    </div>
+                </div>
+                
+                <div class="col-6 col-md-2">
+                    <select name="category" class="form-select">
+                        <option value="">All Categories</option>
+                        <option value="Billing / Payment" {% if category == 'Billing / Payment' %}selected{% endif %}>Billing / Payment</option>
+                        <option value="Account / Login" {% if category == 'Account / Login' %}selected{% endif %}>Account / Login</option>
+                        <option value="Technical Issue" {% if category == 'Technical Issue' %}selected{% endif %}>Technical Issue</option>
+                        <option value="Order / Delivery" {% if category == 'Order / Delivery' %}selected{% endif %}>Order / Delivery</option>
+                        <option value="Product Issue" {% if category == 'Product Issue' %}selected{% endif %}>Product Issue</option>
+                        <option value="Cancellation / Refund" {% if category == 'Cancellation / Refund' %}selected{% endif %}>Cancellation / Refund</option>
+                        <option value="General Inquiry" {% if category == 'General Inquiry' %}selected{% endif %}>General Inquiry</option>
+                    </select>
+                </div>
+
+                <div class="col-6 col-md-2">
+                    <select name="priority" class="form-select">
+                        <option value="">All Priorities</option>
+                        <option value="High" {% if priority == 'High' %}selected{% endif %}>High</option>
+                        <option value="Medium" {% if priority == 'Medium' %}selected{% endif %}>Medium</option>
+                        <option value="Low" {% if priority == 'Low' %}selected{% endif %}>Low</option>
+                    </select>
+                </div>
+
+                <div class="col-6 col-md-2">
+                    <select name="sentiment" class="form-select">
+                        <option value="">All Sentiments</option>
+                        <option value="Positive" {% if sentiment == 'Positive' %}selected{% endif %}>Positive</option>
+                        <option value="Neutral" {% if sentiment == 'Neutral' %}selected{% endif %}>Neutral</option>
+                        <option value="Negative" {% if sentiment == 'Negative' %}selected{% endif %}>Negative</option>
+                    </select>
+                </div>
+
+                <div class="col-6 col-md-2 d-flex gap-2">
+                    <button type="submit" class="btn btn-dark rounded-pill w-100">
+                        <i class="fa-solid fa-filter me-1"></i> Filter
+                    </button>
+                    {% if search or category or priority or sentiment %}
+                    <a href="{{ url_for('history') }}" class="btn btn-outline-secondary rounded-pill px-3" title="Reset Filters">
+                        <i class="fa-solid fa-rotate-left"></i>
+                    </a>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Tickets Table Card -->
+    <div class="card border-0 shadow-sm rounded-3 mb-4">
+        <div class="card-header bg-white border-0 pt-4 pb-3 d-flex justify-content-between align-items-center">
+            <span class="fw-bold text-dark">
+                Showing {{ tickets|length }} record{% if tickets|length != 1 %}s{% endif %}
+            </span>
+            <span class="badge bg-light text-secondary border">Database: SQLite</span>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="ps-4">ID</th>
+                            <th style="width: 35%;">Customer Query</th>
+                            <th>Category</th>
+                            <th>Priority</th>
+                            <th>Sentiment</th>
+                            <th>Date/Time</th>
+                            <th class="text-end pe-4">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if tickets %}
+                            {% for t in tickets %}
+                            <tr id="ticket-row-{{ t.id }}">
+                                <td class="ps-4 font-monospace text-muted fw-bold">#{{ t.id }}</td>
+                                <td>
+                                    <div class="text-truncate-2 fw-medium text-dark cursor-pointer" onclick="viewTicketModal({{ t.id }})" title="Click to view details">
+                                        {{ t.ticket_text }}
+                                    </div>
+                                    <input type="hidden" id="raw-text-{{ t.id }}" value="{{ t.ticket_text }}">
+                                    <input type="hidden" id="raw-resp-{{ t.id }}" value="{{ t.suggested_response }}">
+                                    <input type="hidden" id="raw-cat-{{ t.id }}" value="{{ t.category }}">
+                                    <input type="hidden" id="raw-prio-{{ t.id }}" value="{{ t.priority }}">
+                                    <input type="hidden" id="raw-sent-{{ t.id }}" value="{{ t.sentiment }}">
+                                    <input type="hidden" id="raw-date-{{ t.id }}" value="{{ t.created_at }}">
+                                </td>
+                                <td>
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill">
+                                        {{ t.category }}
+                                    </span>
+                                </td>
+                                <td>
+                                    {% if t.priority == 'High' %}
+                                        <span class="badge bg-danger-subtle text-danger border border-danger-subtle rounded-pill"><i class="fa-solid fa-circle-exclamation me-1"></i>High</span>
+                                    {% elif t.priority == 'Medium' %}
+                                        <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle rounded-pill"><i class="fa-solid fa-clock me-1"></i>Medium</span>
+                                    {% else %}
+                                        <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill"><i class="fa-solid fa-check me-1"></i>Low</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if t.sentiment == 'Negative' %}
+                                        <span class="badge bg-danger-subtle text-danger border border-danger-subtle rounded-pill"><i class="fa-solid fa-face-frown me-1"></i>Negative</span>
+                                    {% elif t.sentiment == 'Positive' %}
+                                        <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill"><i class="fa-solid fa-face-smile me-1"></i>Positive</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle rounded-pill"><i class="fa-solid fa-face-meh me-1"></i>Neutral</span>
+                                    {% endif %}
+                                </td>
+                                <td class="text-muted small">{{ t.created_at }}</td>
+                                <td class="text-end pe-4">
+                                    <button class="btn btn-sm btn-light border rounded-pill px-2 me-1" onclick="viewTicketModal({{ t.id }})" title="View Details">
+                                        <i class="fa-solid fa-eye text-primary"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-light border rounded-pill px-2 text-danger" onclick="deleteTicket({{ t.id }})" title="Delete">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="7" class="text-center py-5 text-muted">
+                                    <i class="fa-solid fa-magnifying-glass fa-2x mb-3 d-block text-secondary"></i>
+                                    <h5>No tickets match your filter criteria</h5>
+                                    <p class="small text-muted mb-0">Try clearing your search query or reset filter options.</p>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Viewing Ticket Details -->
+<div class="modal fade" id="ticketDetailModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content border-0 shadow rounded-4">
+            <div class="modal-header border-0 pb-0">
+                <h5 class="modal-title fw-bold" id="modalTitle">
+                    <i class="fa-solid fa-ticket text-primary me-2"></i>Ticket <span id="modal-id">#0</span> Details
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <div class="d-flex flex-wrap gap-2 mb-3">
+                    <span class="badge bg-primary-subtle text-primary border px-3 py-2 rounded-pill" id="modal-cat">Category</span>
+                    <span class="badge px-3 py-2 rounded-pill" id="modal-prio">Priority</span>
+                    <span class="badge px-3 py-2 rounded-pill" id="modal-sent">Sentiment</span>
+                    <span class="badge bg-light text-muted border px-3 py-2 rounded-pill ms-auto" id="modal-date">Date</span>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-bold text-secondary small text-uppercase">Customer Support Issue</label>
+                    <div class="p-3 bg-light rounded-3 text-dark" id="modal-query"></div>
+                </div>
+
+                <div class="mb-2">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <label class="form-label fw-bold text-secondary small text-uppercase mb-0">Synthesized Suggested Response</label>
+                        <button class="btn btn-sm btn-outline-primary rounded-pill px-2 py-0" id="modal-copy-btn">
+                            <i class="fa-regular fa-copy me-1"></i> Copy
+                        </button>
+                    </div>
+                    <div class="p-3 bg-azure-subtle rounded-3 text-dark border border-azure-subtle font-sans response-text-box" id="modal-response"></div>
+                </div>
+            </div>
+            <div class="modal-footer border-0 pt-0">
+                <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function viewTicketModal(id) {
+    const text = document.getElementById(`raw-text-${id}`).value;
+    const resp = document.getElementById(`raw-resp-${id}`).value;
+    const cat = document.getElementById(`raw-cat-${id}`).value;
+    const prio = document.getElementById(`raw-prio-${id}`).value;
+    const sent = document.getElementById(`raw-sent-${id}`).value;
+    const date = document.getElementById(`raw-date-${id}`).value;
+
+    document.getElementById('modal-id').innerText = '#' + id;
+    document.getElementById('modal-cat').innerText = cat;
+    document.getElementById('modal-date').innerText = date;
+    document.getElementById('modal-query').innerText = text;
+    document.getElementById('modal-response').innerText = resp;
+
+    // Priority badge styling
+    const prioEl = document.getElementById('modal-prio');
+    prioEl.innerText = 'Priority: ' + prio;
+    if (prio === 'High') {
+        prioEl.className = 'badge bg-danger text-white px-3 py-2 rounded-pill';
+    } else if (prio === 'Medium') {
+        prioEl.className = 'badge bg-warning text-dark px-3 py-2 rounded-pill';
+    } else {
+        prioEl.className = 'badge bg-success text-white px-3 py-2 rounded-pill';
+    }
+
+    // Sentiment badge styling
+    const sentEl = document.getElementById('modal-sent');
+    sentEl.innerText = 'Sentiment: ' + sent;
+    if (sent === 'Negative') {
+        sentEl.className = 'badge bg-danger-subtle text-danger border border-danger px-3 py-2 rounded-pill';
+    } else if (sent === 'Positive') {
+        sentEl.className = 'badge bg-success-subtle text-success border border-success px-3 py-2 rounded-pill';
+    } else {
+        sentEl.className = 'badge bg-secondary-subtle text-secondary border px-3 py-2 rounded-pill';
+    }
+
+    const modal = new bootstrap.Modal(document.getElementById('ticketDetailModal'));
+    modal.show();
+}
+
+document.getElementById('modal-copy-btn').addEventListener('click', function() {
+    const text = document.getElementById('modal-response').innerText;
+    navigator.clipboard.writeText(text).then(() => {
+        this.innerHTML = '<i class="fa-solid fa-check me-1"></i> Copied!';
+        setTimeout(() => {
+            this.innerHTML = '<i class="fa-regular fa-copy me-1"></i> Copy';
+        }, 2000);
+    });
+});
+
+function deleteTicket(id) {
+    if (confirm(`Are you sure you want to delete ticket #${id}?`)) {
+        fetch(`/api/tickets/${id}`, { method: 'DELETE' })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    const row = document.getElementById(`ticket-row-${id}`);
+                    if (row) row.remove();
+                } else {
+                    alert('Failed to delete ticket: ' + data.error);
+                }
+            })
+            .catch(err => alert('Network error deleting ticket.'));
+    }
+}
+</script>
+{% endblock %}

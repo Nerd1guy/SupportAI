@@ -1,0 +1,337 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <!-- Header -->
+    <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-4 gap-3">
+        <div>
+            <h2 class="fw-bold mb-1">
+                <i class="fa-solid fa-microchip text-azure me-2"></i>Machine Learning Model Evaluation
+            </h2>
+            <p class="text-muted mb-0">Empirical benchmarking of classification algorithms (Logistic Regression vs. Random Forest) on customer support ticket dataset.</p>
+        </div>
+        <div class="d-flex gap-2">
+            <span class="badge bg-success-subtle text-success border border-success px-3 py-2 rounded-pill font-monospace">
+                <i class="fa-solid fa-trophy me-1"></i> Production Model: {{ metrics.selected_best_model }}
+            </span>
+        </div>
+    </div>
+
+    <!-- Algorithm Comparison Banner -->
+    <div class="row g-4 mb-4">
+        <!-- Model 1: Logistic Regression Card -->
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm rounded-3 h-100 border-top border-4 {% if metrics.selected_best_model == 'Logistic Regression' %}border-success bg-white{% else %}border-secondary bg-light{% endif %}">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <span class="badge bg-primary-subtle text-primary border rounded-pill mb-1">Algorithm 1 (Linear)</span>
+                            <h4 class="fw-bold text-dark mb-0">Logistic Regression</h4>
+                        </div>
+                        {% if metrics.selected_best_model == 'Logistic Regression' %}
+                            <span class="badge bg-success text-white px-3 py-1 rounded-pill"><i class="fa-solid fa-check me-1"></i> Selected Best</span>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="row g-2 mb-3 text-center">
+                        <div class="col-4">
+                            <div class="p-2 rounded bg-light border">
+                                <div class="text-muted small">Accuracy</div>
+                                <h5 class="fw-bold text-primary mb-0">{{ (metrics.models.logistic_regression.metrics.accuracy * 100)|round(2) }}%</h5>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="p-2 rounded bg-light border">
+                                <div class="text-muted small">Weighted F1</div>
+                                <h5 class="fw-bold text-success mb-0">{{ (metrics.models.logistic_regression.metrics.f1_weighted * 100)|round(2) }}%</h5>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="p-2 rounded bg-light border">
+                                <div class="text-muted small">Macro F1</div>
+                                <h5 class="fw-bold text-dark mb-0">{{ (metrics.models.logistic_regression.metrics.f1_macro * 100)|round(2) }}%</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="text-muted small mb-0">
+                        <i class="fa-solid fa-circle-info text-primary me-1"></i>
+                        Optimized with sublinear TF-IDF features and L2 regularization. Excels on sparse high-dimensional textual feature spaces.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Model 2: Random Forest Card -->
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm rounded-3 h-100 border-top border-4 {% if metrics.selected_best_model == 'Random Forest' %}border-success bg-white{% else %}border-secondary bg-white{% endif %}">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <span class="badge bg-info-subtle text-info-emphasis border rounded-pill mb-1">Algorithm 2 (Ensemble)</span>
+                            <h4 class="fw-bold text-dark mb-0">Random Forest Classifier</h4>
+                        </div>
+                        {% if metrics.selected_best_model == 'Random Forest' %}
+                            <span class="badge bg-success text-white px-3 py-1 rounded-pill"><i class="fa-solid fa-check me-1"></i> Selected Best</span>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="row g-2 mb-3 text-center">
+                        <div class="col-4">
+                            <div class="p-2 rounded bg-light border">
+                                <div class="text-muted small">Accuracy</div>
+                                <h5 class="fw-bold text-primary mb-0">{{ (metrics.models.random_forest.metrics.accuracy * 100)|round(2) }}%</h5>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="p-2 rounded bg-light border">
+                                <div class="text-muted small">Weighted F1</div>
+                                <h5 class="fw-bold text-success mb-0">{{ (metrics.models.random_forest.metrics.f1_weighted * 100)|round(2) }}%</h5>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="p-2 rounded bg-light border">
+                                <div class="text-muted small">Macro F1</div>
+                                <h5 class="fw-bold text-dark mb-0">{{ (metrics.models.random_forest.metrics.f1_macro * 100)|round(2) }}%</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="text-muted small mb-0">
+                        <i class="fa-solid fa-circle-info text-info me-1"></i>
+                        Ensemble of 150 randomized decision trees. Robust to non-linear feature interactions, though standard linear bounds are more direct on sparse n-gram matrices.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Side-by-Side Comparison Table -->
+    <div class="card border-0 shadow-sm rounded-3 mb-4">
+        <div class="card-header bg-white border-0 pt-4 pb-3">
+            <h5 class="fw-bold mb-0"><i class="fa-solid fa-table-columns text-primary me-2"></i>Comprehensive Metrics Comparison Table</h5>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle mb-0 text-center">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="text-start ps-4">Evaluation Metric</th>
+                            <th>Logistic Regression</th>
+                            <th>Random Forest</th>
+                            <th>Delta (Difference)</th>
+                            <th>Superior Model</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-start ps-4 fw-medium">Accuracy Score</td>
+                            <td class="fw-bold text-primary">{{ (metrics.models.logistic_regression.metrics.accuracy * 100)|round(2) }}%</td>
+                            <td>{{ (metrics.models.random_forest.metrics.accuracy * 100)|round(2) }}%</td>
+                            <td class="text-success fw-bold">+{{ ((metrics.models.logistic_regression.metrics.accuracy - metrics.models.random_forest.metrics.accuracy) * 100)|round(2) }}%</td>
+                            <td><span class="badge bg-success-subtle text-success border">Logistic Regression</span></td>
+                        </tr>
+                        <tr>
+                            <td class="text-start ps-4 fw-medium">Precision (Weighted)</td>
+                            <td class="fw-bold text-primary">{{ (metrics.models.logistic_regression.metrics.precision_weighted * 100)|round(2) }}%</td>
+                            <td>{{ (metrics.models.random_forest.metrics.precision_weighted * 100)|round(2) }}%</td>
+                            <td class="text-success fw-bold">+{{ ((metrics.models.logistic_regression.metrics.precision_weighted - metrics.models.random_forest.metrics.precision_weighted) * 100)|round(2) }}%</td>
+                            <td><span class="badge bg-success-subtle text-success border">Logistic Regression</span></td>
+                        </tr>
+                        <tr>
+                            <td class="text-start ps-4 fw-medium">Recall (Weighted)</td>
+                            <td class="fw-bold text-primary">{{ (metrics.models.logistic_regression.metrics.recall_weighted * 100)|round(2) }}%</td>
+                            <td>{{ (metrics.models.random_forest.metrics.recall_weighted * 100)|round(2) }}%</td>
+                            <td class="text-success fw-bold">+{{ ((metrics.models.logistic_regression.metrics.recall_weighted - metrics.models.random_forest.metrics.recall_weighted) * 100)|round(2) }}%</td>
+                            <td><span class="badge bg-success-subtle text-success border">Logistic Regression</span></td>
+                        </tr>
+                        <tr>
+                            <td class="text-start ps-4 fw-medium">F1-Score (Weighted)</td>
+                            <td class="fw-bold text-primary">{{ (metrics.models.logistic_regression.metrics.f1_weighted * 100)|round(2) }}%</td>
+                            <td>{{ (metrics.models.random_forest.metrics.f1_weighted * 100)|round(2) }}%</td>
+                            <td class="text-success fw-bold">+{{ ((metrics.models.logistic_regression.metrics.f1_weighted - metrics.models.random_forest.metrics.f1_weighted) * 100)|round(2) }}%</td>
+                            <td><span class="badge bg-success-subtle text-success border">Logistic Regression</span></td>
+                        </tr>
+                        <tr>
+                            <td class="text-start ps-4 fw-medium">F1-Score (Macro Average)</td>
+                            <td class="fw-bold text-primary">{{ (metrics.models.logistic_regression.metrics.f1_macro * 100)|round(2) }}%</td>
+                            <td>{{ (metrics.models.random_forest.metrics.f1_macro * 100)|round(2) }}%</td>
+                            <td class="text-success fw-bold">+{{ ((metrics.models.logistic_regression.metrics.f1_macro - metrics.models.random_forest.metrics.f1_macro) * 100)|round(2) }}%</td>
+                            <td><span class="badge bg-success-subtle text-success border">Logistic Regression</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Per-Class Metrics & Confusion Matrix Row -->
+    <div class="row g-4 mb-4">
+        <!-- Per Class Table -->
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm rounded-3 h-100">
+                <div class="card-header bg-white border-0 pt-4 pb-3">
+                    <h5 class="fw-bold mb-0"><i class="fa-solid fa-list-check text-azure me-2"></i>Per-Category Metrics (Production Model)</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0 small">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="ps-3">Category Class</th>
+                                    <th>Precision</th>
+                                    <th>Recall</th>
+                                    <th>F1-Score</th>
+                                    <th class="pe-3">Support</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% set per_class = metrics.models.logistic_regression.metrics.per_class %}
+                                {% for cls, m in per_class.items() %}
+                                <tr>
+                                    <td class="ps-3 fw-medium text-dark">{{ cls }}</td>
+                                    <td>{{ (m.precision * 100)|round(1) }}%</td>
+                                    <td>{{ (m.recall * 100)|round(1) }}%</td>
+                                    <td class="fw-bold text-primary">{{ (m.f1_score * 100)|round(1) }}%</td>
+                                    <td class="pe-3 text-muted">{{ m.support }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Visual Confusion Matrix Heatmap / Table -->
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm rounded-3 h-100">
+                <div class="card-header bg-white border-0 pt-4 pb-2">
+                    <h5 class="fw-bold mb-0"><i class="fa-solid fa-border-all text-success me-2"></i>Confusion Matrix (Test Set)</h5>
+                    <p class="small text-muted mb-0">Predicted vs. Actual category distribution across 61 held-out test samples.</p>
+                </div>
+                <div class="card-body p-3">
+                    {% set cm = metrics.models.logistic_regression.metrics.confusion_matrix %}
+                    {% set classes = metrics.models.logistic_regression.metrics.classes %}
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-sm text-center align-middle mb-0 font-monospace" style="font-size: 0.75rem;">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="bg-light text-muted" title="Actual \ Predicted">Actual \ Pred</th>
+                                    {% for c in classes %}
+                                    <th title="{{ c }}">{{ c[:4] }}..</th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in cm %}
+                                {% set actual_idx = loop.index0 %}
+                                <tr>
+                                    <th class="table-light text-truncate" style="max-width: 70px;" title="{{ classes[actual_idx] }}">
+                                        {{ classes[actual_idx][:4] }}..
+                                    </th>
+                                    {% for val in row %}
+                                    {% set pred_idx = loop.index0 %}
+                                    <td class="{% if actual_idx == pred_idx and val > 0 %}bg-success text-white fw-bold{% elif val > 0 %}bg-warning-subtle text-dark{% else %}text-muted{% endif %}">
+                                        {{ val }}
+                                    </td>
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mt-2 small text-muted">
+                        <span><span class="badge bg-success me-1">&nbsp;</span> True Positives (Diagonal)</span>
+                        <span><span class="badge bg-warning-subtle text-dark me-1">#</span> Misclassifications</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Priority & Sentiment Models Performance -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm rounded-3">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-3"><i class="fa-solid fa-gauge-high text-danger me-2"></i>Priority Classifier Metrics</h5>
+                    <div class="row g-2 text-center mb-3">
+                        <div class="col-6">
+                            <div class="p-2 rounded bg-light border">
+                                <div class="text-muted small">Test Accuracy</div>
+                                <h5 class="fw-bold text-danger mb-0">{{ (metrics.models.priority_classifier.metrics.accuracy * 100)|round(2) }}%</h5>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="p-2 rounded bg-light border">
+                                <div class="text-muted small">Weighted F1</div>
+                                <h5 class="fw-bold text-dark mb-0">{{ (metrics.models.priority_classifier.metrics.f1_weighted * 100)|round(2) }}%</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="small text-muted mb-0">Combined TF-IDF classification augmented with urgency lexicon heuristic for high-risk customer protection.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm rounded-3">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-3"><i class="fa-solid fa-face-smile text-success me-2"></i>Sentiment Classifier Metrics</h5>
+                    <div class="row g-2 text-center mb-3">
+                        <div class="col-6">
+                            <div class="p-2 rounded bg-light border">
+                                <div class="text-muted small">Test Accuracy</div>
+                                <h5 class="fw-bold text-success mb-0">{{ (metrics.models.sentiment_classifier.metrics.accuracy * 100)|round(2) }}%</h5>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="p-2 rounded bg-light border">
+                                <div class="text-muted small">Weighted F1</div>
+                                <h5 class="fw-bold text-dark mb-0">{{ (metrics.models.sentiment_classifier.metrics.f1_weighted * 100)|round(2) }}%</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="small text-muted mb-0">Multiclass sentiment analysis (Positive, Neutral, Negative) providing empathetic context to response generation.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NLP Architecture & Pipeline Explanation (Academic / Viva Guide) -->
+    <div class="card border-0 shadow-sm rounded-3 mb-4">
+        <div class="card-header bg-white border-0 pt-4 pb-2">
+            <h5 class="fw-bold mb-0"><i class="fa-solid fa-diagram-project text-azure me-2"></i>End-to-End NLP & ML Pipeline Architecture</h5>
+        </div>
+        <div class="card-body p-4">
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <div class="p-3 bg-light rounded-3 h-100 border">
+                        <div class="fw-bold text-primary mb-1">1. Preprocessing</div>
+                        <p class="small text-muted mb-0">Lowercasing, regex URL/email stripping, special character removal, whitespace normalization.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="p-3 bg-light rounded-3 h-100 border">
+                        <div class="fw-bold text-primary mb-1">2. TF-IDF Vectors</div>
+                        <p class="small text-muted mb-0">Unigram + Bigram (1,2) token extraction, sublinear term frequency scaling, 2,500 max features.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="p-3 bg-light rounded-3 h-100 border">
+                        <div class="fw-bold text-primary mb-1">3. Classification</div>
+                        <p class="small text-muted mb-0">Logistic Regression vs Random Forest benchmarked on 80/20 stratified split. Best model deployed.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="p-3 bg-light rounded-3 h-100 border">
+                        <div class="fw-bold text-primary mb-1">4. Response Synthesis</div>
+                        <p class="small text-muted mb-0">Dynamic blending of category actions, priority SLAs, and empathetic tone into customer response.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

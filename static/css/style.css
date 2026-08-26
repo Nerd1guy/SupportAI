@@ -1,0 +1,148 @@
+:root {
+    --azure-blue: #0078d4;
+    --azure-dark: #005a9e;
+    --azure-light: #eff6fc;
+    --azure-accent: #2b88d8;
+    --primary-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --mono-font: 'JetBrains Mono', monospace;
+}
+
+body {
+    font-family: var(--primary-font);
+    background-color: #f8fafc;
+    color: #1e293b;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Custom Azure colors & classes */
+.text-azure {
+    color: var(--azure-blue) !important;
+}
+
+.bg-azure-subtle {
+    background-color: #e0f2fe !important;
+    color: #0369a1 !important;
+}
+
+.border-azure {
+    border-color: var(--azure-blue) !important;
+}
+
+.border-azure-subtle {
+    border-color: #bae6fd !important;
+}
+
+.font-monospace {
+    font-family: var(--mono-font) !important;
+}
+
+/* Navbar */
+.brand-icon {
+    width: 34px;
+    height: 34px;
+    background: linear-gradient(135deg, #0078d4, #00b4d8);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+.navbar .nav-link {
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.5rem 0.85rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.navbar .nav-link:hover, .navbar .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff !important;
+}
+
+/* Hero Banner */
+.bg-gradient-primary {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #005a9e 100%);
+}
+
+.backdrop-blur {
+    backdrop-filter: blur(8px);
+}
+
+.hero-visual-card {
+    width: 320px;
+    transform: rotate(2deg);
+    transition: transform 0.3s ease;
+}
+
+.hero-visual-card:hover {
+    transform: rotate(0deg) scale(1.02);
+}
+
+/* Stat Cards */
+.stat-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08) !important;
+}
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Preset Buttons */
+.preset-btn {
+    background-color: #ffffff;
+    color: #475569;
+    border-color: #e2e8f0;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.15s ease;
+}
+
+.preset-btn:hover {
+    background-color: #0078d4;
+    color: #ffffff;
+    border-color: #0078d4;
+    transform: translateY(-1px);
+}
+
+/* Form Controls */
+.form-control:focus, .form-select:focus {
+    border-color: var(--azure-blue);
+    box-shadow: 0 0 0 0.25rem rgba(0, 120, 212, 0.15);
+}
+
+/* Response Box */
+.response-text-box {
+    white-space: pre-wrap;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    background-color: #f8fafc;
+}
+
+/* Result Metric Cards */
+.result-metric-card {
+    transition: all 0.2s ease;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.text-truncate-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

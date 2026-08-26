@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Header -->
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <div>
+                    <h2 class="fw-bold mb-1">
+                        <i class="fa-solid fa-wand-magic-sparkles text-azure me-2"></i>Analyze Support Ticket
+                    </h2>
+                    <p class="text-muted mb-0">Enter a customer inquiry in natural language to perform instant ML triage, priority scoring, and response synthesis.</p>
+                </div>
+                <span class="badge bg-primary-subtle text-primary border border-primary px-3 py-2 rounded-pill font-monospace">
+                    <i class="fa-solid fa-brain me-1"></i> TF-IDF + Logistic Regression
+                </span>
+            </div>
+
+            <!-- Preset Quick-Fill Demo Chips -->
+            <div class="card border-0 shadow-sm rounded-3 mb-4 bg-light">
+                <div class="card-body p-3">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <span class="small fw-bold text-secondary text-uppercase tracking-wider">
+                            <i class="fa-solid fa-bolt text-warning me-1"></i> Quick Test Scenarios (Click to Demo)
+                        </span>
+                        <span class="small text-muted">1-click presets for presentation</span>
+                    </div>
+                    <div class="d-flex flex-wrap gap-2">
+                        <button type="button" class="btn btn-sm btn-white border rounded-pill preset-btn" data-text="My payment was deducted from my account but my order was not placed. I need this resolved urgently.">
+                            💳 Payment Debited (Urgent)
+                        </button>
+                        <button type="button" class="btn btn-sm btn-white border rounded-pill preset-btn" data-text="I have been trying to log into my account but my password reset isn't working.">
+                            🔐 Password Reset Lockout
+                        </button>
+                        <button type="button" class="btn btn-sm btn-white border rounded-pill preset-btn" data-text="The web application is throwing 500 internal server error when uploading large files.">
+                            ⚠️ 500 Server Error Bug
+                        </button>
+                        <button type="button" class="btn btn-sm btn-white border rounded-pill preset-btn" data-text="My package was marked as delivered but I have not received it yet. Courier tracking is invalid.">
+                            📦 Package Missing In Transit
+                        </button>
+                        <button type="button" class="btn btn-sm btn-white border rounded-pill preset-btn" data-text="I want to cancel my subscription immediately and get a full refund to my credit card.">
+                            🔄 Cancel Plan & Refund
+                        </button>
+                        <button type="button" class="btn btn-sm btn-white border rounded-pill preset-btn" data-text="The product exceeded my expectations! Build quality is fantastic and very intuitive.">
+                            🌟 Positive Product Praise
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Form Card -->
+            <div class="card border-0 shadow-sm rounded-3 mb-4">
+                <div class="card-body p-4">
+                    <form id="analyze-form">
+                        <div class="mb-3">
+                            <label for="ticket_text" class="form-label fw-semibold d-flex justify-content-between">
+                                <span>Customer Support Issue / Message</span>
+                                <span class="text-muted small" id="char-count">0 characters</span>
+                            </label>
+                            <textarea 
+                                class="form-control form-control-lg border-2 shadow-none" 
+                                id="ticket_text" 
+                                name="ticket_text" 
+                                rows="4" 
+                                placeholder="Enter customer support issue in natural language (e.g., 'My payment was deducted but my order was not confirmed...')"
+                                required
+                            ></textarea>
+                        </div>
+                        
+                        <div class="d-flex align-items-center justify-content-between">
+                            <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill px-3" id="clear-btn">
+                                <i class="fa-solid fa-eraser me-1"></i> Clear Text
+                            </button>
+                            <button type="submit" class="btn btn-primary px-4 py-2 rounded-pill fw-semibold shadow-sm" id="submit-btn">
+                                <span class="spinner-border spinner-border-sm me-2 d-none" id="spinner" role="status" aria-hidden="true"></span>
+                                <i class="fa-solid fa-magnifying-glass-chart me-1" id="submit-icon"></i> Analyze Ticket
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Live Prediction Result Container (Hidden until submission) -->
+            <div id="result-container" class="d-none">
+                <!-- Result Heading -->
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h4 class="fw-bold mb-0 text-dark">
+                        <i class="fa-solid fa-square-poll-vertical text-success me-2"></i>Analysis Results
+                    </h4>
+                    <span class="badge bg-success-subtle text-success border border-success px-3 py-2 rounded-pill" id="ticket-saved-badge">
+                        <i class="fa-solid fa-circle-check me-1"></i> Saved to SQLite (Ticket #<span id="res-ticket-id">0</span>)
+                    </span>
+                </div>
+
+                <!-- 3 Attribute Cards Grid -->
+                <div class="row g-3 mb-4">
+                    <!-- Category Card -->
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm rounded-3 result-metric-card border-top border-4 border-primary">
+                            <div class="card-body">
+                                <div class="text-muted small text-uppercase fw-bold mb-1">
+                                    <i class="fa-solid fa-tag text-primary me-1"></i> Predicted Category
+                                </div>
+                                <h4 class="fw-bold text-primary mb-2" id="res-category">-</h4>
+                                <div class="d-flex align-items-center justify-content-between small text-muted">
+                                    <span>Confidence Score</span>
+                                    <span class="fw-bold text-dark" id="res-cat-conf">-%</span>
+                                </div>
+                                <div class="progress mt-2" style="height: 6px;">
+                                    <div class="progress-bar bg-primary" id="res-cat-bar" role="progressbar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Priority Card -->
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm rounded-3 result-metric-card border-top border-4" id="prio-card-border">
+                            <div class="card-body">
+                                <div class="text-muted small text-uppercase fw-bold mb-1">
+                                    <i class="fa-solid fa-triangle-exclamation me-1" id="prio-icon"></i> Priority Level
+                                </div>
+                                <div class="d-flex align-items-center gap-2 mb-2">
+                                    <h4 class="fw-bold mb-0" id="res-priority">-</h4>
+                                    <span class="badge rounded-pill" id="res-prio-badge">-</span>
+                                </div>
+                                <p class="small text-muted mb-0" id="res-prio-desc">-</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sentiment Card -->
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm rounded-3 result-metric-card border-top border-4" id="sent-card-border">
+                            <div class="card-body">
+                                <div class="text-muted small text-uppercase fw-bold mb-1">
+                                    <i class="fa-solid fa-face-smile me-1" id="sent-icon"></i> Customer Sentiment
+                                </div>
+                                <div class="d-flex align-items-center gap-2 mb-2">
+                                    <h4 class="fw-bold mb-0" id="res-sentiment">-</h4>
+                                    <span class="badge rounded-pill" id="res-sent-badge">-</span>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between small text-muted">
+                                    <span>Tone Confidence</span>
+                                    <span class="fw-bold text-dark" id="res-sent-conf">-%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Suggested Customer Support Response Card -->
+                <div class="card border-0 shadow-sm rounded-3 mb-4 border-start border-4 border-azure">
+                    <div class="card-header bg-white border-0 pt-4 pb-2 d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="fw-bold mb-1 text-dark">
+                                <i class="fa-solid fa-reply text-azure me-2"></i>Automated Suggested Response
+                            </h5>
+                            <p class="text-muted small mb-0">Contextually synthesized based on predicted category, priority SLA, and customer sentiment.</p>
+                        </div>
+                        <button type="button" class="btn btn-outline-primary btn-sm rounded-pill px-3" id="copy-response-btn">
+                            <i class="fa-regular fa-copy me-1"></i> <span id="copy-text">Copy Response</span>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="p-3 bg-light rounded-3 font-sans border response-text-box" id="res-suggested-response">
+                            <!-- Response Text -->
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white border-0 pt-0 pb-3">
+                        <div class="d-flex align-items-center justify-content-between small text-muted">
+                            <span><i class="fa-solid fa-code-fork text-primary me-1"></i> Model: <strong id="res-model-used">Logistic Regression</strong></span>
+                            <span><i class="fa-solid fa-clock text-secondary me-1"></i> Real-time Latency: <strong>&lt; 15 ms</strong></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/analyze.js') }}"></script>
+{% endblock %}
