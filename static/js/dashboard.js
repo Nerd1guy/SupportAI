@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     backgroundColor: "rgba(0, 120, 212, 0.75)",
                     borderColor: "rgba(0, 120, 212, 1)",
                     borderWidth: 1,
-                    borderRadius: 6
+                    borderRadius: 5
                 }]
             },
             options: {
@@ -36,22 +36,22 @@ document.addEventListener("DOMContentLoaded", function () {
                 plugins: {
                     legend: { display: false },
                     tooltip: {
-                        padding: 10,
+                        padding: 8,
                         backgroundColor: "rgba(15, 23, 42, 0.9)"
                     }
                 },
                 scales: {
                     y: {
                         beginAtZero: true,
-                        ticks: { stepSize: 1, precision: 0 },
-                        grid: { color: "rgba(0,0,0,0.05)" }
+                        ticks: { stepSize: 1, precision: 0, font: { size: 10 } },
+                        grid: { color: "rgba(0,0,0,0.04)" }
                     },
                     x: {
                         grid: { display: false },
                         ticks: {
-                            maxRotation: 45,
+                            maxRotation: 30,
                             minRotation: 0,
-                            font: { size: 11 }
+                            font: { size: 10 }
                         }
                     }
                 }
@@ -86,11 +86,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        position: "bottom",
-                        labels: { boxWidth: 12, padding: 12, font: { size: 12 } }
+                        position: "right",
+                        labels: { boxWidth: 10, padding: 8, font: { size: 11 } }
                     }
                 },
-                cutout: "68%"
+                cutout: "65%"
             }
         });
     }
@@ -122,11 +122,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        position: "bottom",
-                        labels: { boxWidth: 12, padding: 12, font: { size: 12 } }
+                        position: "right",
+                        labels: { boxWidth: 10, padding: 8, font: { size: 11 } }
                     }
                 },
-                cutout: "68%"
+                cutout: "65%"
             }
         });
     }

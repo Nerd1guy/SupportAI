@@ -3,17 +3,126 @@
     --azure-dark: #005a9e;
     --azure-light: #eff6fc;
     --azure-accent: #2b88d8;
+    --sidebar-width: 240px;
     --primary-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --mono-font: 'JetBrains Mono', monospace;
 }
 
-body {
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body.app-body {
     font-family: var(--primary-font);
-    background-color: #f8fafc;
+    background-color: #f1f5f9;
     color: #1e293b;
+    overflow-x: hidden;
+}
+
+/* App Wrapper: Sidebar + Main Content */
+.app-wrapper {
+    display: flex;
     min-height: 100vh;
+    width: 100%;
+}
+
+/* Sidebar */
+.app-sidebar {
+    width: var(--sidebar-width);
+    min-width: var(--sidebar-width);
+    background-color: #0f172a !important;
     display: flex;
     flex-direction: column;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 991.98px) {
+    .app-sidebar {
+        display: none;
+    }
+}
+
+.brand-icon {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #0078d4, #00b4d8);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.brand-title {
+    font-size: 1.15rem;
+    line-height: 1.1;
+}
+
+.sidebar-nav .nav-link {
+    font-weight: 500;
+    font-size: 0.88rem;
+    padding: 0.6rem 0.85rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    color: #94a3b8 !important;
+    transition: all 0.15s ease;
+}
+
+.sidebar-nav .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #ffffff !important;
+}
+
+.sidebar-nav .nav-link.active {
+    background-color: var(--azure-blue) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 10px rgba(0, 120, 212, 0.35);
+}
+
+.sidebar-icon {
+    width: 20px;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+/* Main Content Area */
+.app-main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background-color: #f8fafc;
+}
+
+.page-content-wrapper {
+    flex: 1;
+    padding: 1.25rem 1.5rem;
+}
+
+/* No-scroll Dashboard Viewport Container */
+.dashboard-viewport-container {
+    max-height: calc(100vh - 20px);
+}
+
+@media (min-width: 1200px) {
+    .page-content-wrapper:has(.dashboard-viewport-container) {
+        padding: 0.75rem 1.25rem;
+    }
 }
 
 /* Custom Azure colors & classes */
@@ -38,66 +147,24 @@ body {
     font-family: var(--mono-font) !important;
 }
 
-/* Navbar */
-.brand-icon {
-    width: 34px;
-    height: 34px;
-    background: linear-gradient(135deg, #0078d4, #00b4d8);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
+/* Compact Stat Cards */
+.stat-card-compact {
+    background: #ffffff;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.navbar .nav-link {
-    font-weight: 500;
-    font-size: 0.95rem;
-    padding: 0.5rem 0.85rem;
-    border-radius: 6px;
-    transition: all 0.2s ease;
-}
-
-.navbar .nav-link:hover, .navbar .nav-link.active {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: #ffffff !important;
-}
-
-/* Hero Banner */
-.bg-gradient-primary {
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #005a9e 100%);
-}
-
-.backdrop-blur {
-    backdrop-filter: blur(8px);
-}
-
-.hero-visual-card {
-    width: 320px;
-    transform: rotate(2deg);
-    transition: transform 0.3s ease;
-}
-
-.hero-visual-card:hover {
-    transform: rotate(0deg) scale(1.02);
-}
-
-/* Stat Cards */
-.stat-card {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.stat-card:hover {
+.stat-card-compact:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.06) !important;
 }
 
-.stat-icon {
-    width: 50px;
-    height: 50px;
+.stat-icon-sm {
+    width: 38px;
+    height: 38px;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 1rem;
 }
 
 /* Preset Buttons */
@@ -105,15 +172,15 @@ body {
     background-color: #ffffff;
     color: #475569;
     border-color: #e2e8f0;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     font-weight: 500;
     transition: all 0.15s ease;
 }
 
 .preset-btn:hover {
-    background-color: #0078d4;
+    background-color: var(--azure-blue);
     color: #ffffff;
-    border-color: #0078d4;
+    border-color: var(--azure-blue);
     transform: translateY(-1px);
 }
 
@@ -127,7 +194,7 @@ body {
 .response-text-box {
     white-space: pre-wrap;
     line-height: 1.6;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     background-color: #f8fafc;
 }
 

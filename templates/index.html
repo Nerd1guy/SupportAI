@@ -1,227 +1,187 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
-    <!-- Hero / Intro Banner -->
-    <div class="p-4 p-md-5 mb-4 rounded-4 bg-gradient-primary text-white shadow-sm position-relative overflow-hidden">
-        <div class="row align-items-center position-relative z-1">
-            <div class="col-lg-8">
-                <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-white bg-opacity-20 backdrop-blur text-white small mb-3">
-                    <i class="fa-solid fa-sparkles"></i> AI-Powered Support Automation
-                </div>
-                <h1 class="display-6 fw-bold mb-2">SupportAI Dashboard</h1>
-                <p class="lead mb-4 text-white-50 fs-6">
-                    Automated NLP ticket triage, priority scoring, sentiment detection, and empathetic response generation.
-                </p>
-                <div class="d-flex flex-wrap gap-2">
-                    <a href="{{ url_for('analyze') }}" class="btn btn-light text-primary fw-semibold px-4 py-2 rounded-pill shadow-sm">
-                        <i class="fa-solid fa-play me-2"></i> Try Live Ticket Triage
-                    </a>
-                    <a href="{{ url_for('performance') }}" class="btn btn-outline-light px-4 py-2 rounded-pill">
-                        <i class="fa-solid fa-chart-line me-2"></i> View ML Evaluation
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4 d-none d-lg-flex justify-content-center">
-                <div class="hero-visual-card p-3 rounded-3 bg-white text-dark shadow-lg">
-                    <div class="d-flex align-items-center justify-content-between mb-2">
-                        <span class="badge bg-danger-subtle text-danger"><i class="fa-solid fa-bolt me-1"></i> Priority: High</span>
-                        <span class="badge bg-primary-subtle text-primary">Billing / Payment</span>
-                    </div>
-                    <p class="small text-muted mb-2 fst-italic">"My payment was deducted but order not confirmed..."</p>
-                    <div class="p-2 bg-light rounded small border-start border-primary border-3">
-                        <span class="fw-semibold text-dark">Suggested Action:</span> Financial log audit & expedited ticket routing.
-                    </div>
-                </div>
-            </div>
+<div class="dashboard-viewport-container container-fluid px-3 px-lg-4 py-3">
+    <!-- Compact Header Bar -->
+    <div class="d-flex align-items-center justify-content-between mb-3">
+        <div>
+            <h4 class="fw-bold mb-0 text-dark">
+                <i class="fa-solid fa-chart-pie text-azure me-2"></i>SupportAI Dashboard
+            </h4>
+            <p class="text-muted small mb-0">Automated NLP ticket triage, priority prediction, sentiment detection, and response synthesis</p>
         </div>
-        <div class="hero-bg-shapes"></div>
+        <div>
+            <a href="{{ url_for('analyze') }}" class="btn btn-primary btn-sm rounded-pill px-3 shadow-sm">
+                <i class="fa-solid fa-wand-magic-sparkles me-1"></i> Analyze Ticket
+            </a>
+        </div>
     </div>
 
-    <!-- KPI Metric Cards -->
-    <div class="row g-3 mb-4">
-        <div class="col-sm-6 col-xl-3">
-            <div class="card h-100 border-0 shadow-sm rounded-3 stat-card">
-                <div class="card-body d-flex align-items-center">
-                    <div class="stat-icon bg-primary-subtle text-primary rounded-3 me-3">
-                        <i class="fa-solid fa-ticket fa-lg"></i>
-                    </div>
+    <!-- KPI Metric Cards (Compact) -->
+    <div class="row g-2 mb-3">
+        <div class="col-6 col-xl-3">
+            <div class="card border-0 shadow-sm rounded-3 stat-card-compact h-100">
+                <div class="card-body p-2 px-3 d-flex align-items-center justify-content-between">
                     <div>
-                        <div class="text-muted small fw-medium">Total Tickets Analyzed</div>
-                        <h3 class="fw-bold mb-0" id="stat-total">{{ stats.total_tickets }}</h3>
+                        <div class="text-muted small fw-medium">Total Analyzed</div>
+                        <h4 class="fw-bold mb-0 text-dark" id="stat-total">{{ stats.total_tickets }}</h4>
+                    </div>
+                    <div class="stat-icon-sm bg-primary-subtle text-primary rounded-3">
+                        <i class="fa-solid fa-ticket"></i>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-sm-6 col-xl-3">
-            <div class="card h-100 border-0 shadow-sm rounded-3 stat-card">
-                <div class="card-body d-flex align-items-center">
-                    <div class="stat-icon bg-danger-subtle text-danger rounded-3 me-3">
-                        <i class="fa-solid fa-triangle-exclamation fa-lg"></i>
-                    </div>
+        <div class="col-6 col-xl-3">
+            <div class="card border-0 shadow-sm rounded-3 stat-card-compact h-100">
+                <div class="card-body p-2 px-3 d-flex align-items-center justify-content-between">
                     <div>
-                        <div class="text-muted small fw-medium">High Priority Issues</div>
-                        <h3 class="fw-bold mb-0 text-danger" id="stat-high">{{ stats.high_priority }}</h3>
+                        <div class="text-muted small fw-medium">High Priority</div>
+                        <h4 class="fw-bold mb-0 text-danger" id="stat-high">{{ stats.high_priority }}</h4>
+                    </div>
+                    <div class="stat-icon-sm bg-danger-subtle text-danger rounded-3">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-sm-6 col-xl-3">
-            <div class="card h-100 border-0 shadow-sm rounded-3 stat-card">
-                <div class="card-body d-flex align-items-center">
-                    <div class="stat-icon bg-warning-subtle text-warning rounded-3 me-3">
-                        <i class="fa-solid fa-face-frown fa-lg"></i>
-                    </div>
+        <div class="col-6 col-xl-3">
+            <div class="card border-0 shadow-sm rounded-3 stat-card-compact h-100">
+                <div class="card-body p-2 px-3 d-flex align-items-center justify-content-between">
                     <div>
                         <div class="text-muted small fw-medium">Negative Sentiment</div>
-                        <h3 class="fw-bold mb-0 text-warning-emphasis" id="stat-negative">{{ stats.negative_sentiment }}</h3>
+                        <h4 class="fw-bold mb-0 text-warning-emphasis" id="stat-negative">{{ stats.negative_sentiment }}</h4>
+                    </div>
+                    <div class="stat-icon-sm bg-warning-subtle text-warning rounded-3">
+                        <i class="fa-solid fa-face-frown"></i>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-sm-6 col-xl-3">
-            <div class="card h-100 border-0 shadow-sm rounded-3 stat-card">
-                <div class="card-body d-flex align-items-center">
-                    <div class="stat-icon bg-success-subtle text-success rounded-3 me-3">
-                        <i class="fa-solid fa-layer-group fa-lg"></i>
-                    </div>
-                    <div>
-                        <div class="text-muted small fw-medium">Most Common Category</div>
-                        <h5 class="fw-bold mb-0 text-truncate" style="max-width: 150px;" title="{{ stats.top_category }}">
+        <div class="col-6 col-xl-3">
+            <div class="card border-0 shadow-sm rounded-3 stat-card-compact h-100">
+                <div class="card-body p-2 px-3 d-flex align-items-center justify-content-between">
+                    <div style="min-width: 0;">
+                        <div class="text-muted small fw-medium">Top Category</div>
+                        <h5 class="fw-bold mb-0 text-truncate text-success" title="{{ stats.top_category }}">
                             {{ stats.top_category }}
                         </h5>
                     </div>
+                    <div class="stat-icon-sm bg-success-subtle text-success rounded-3 ms-2">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Charts Row -->
-    <div class="row g-4 mb-4">
-        <!-- Category Distribution Chart -->
-        <div class="col-lg-6">
-            <div class="card border-0 shadow-sm rounded-3 h-100">
-                <div class="card-header bg-white border-0 pt-4 pb-0 d-flex justify-content-between align-items-center">
-                    <h5 class="fw-bold mb-0"><i class="fa-solid fa-chart-column text-primary me-2"></i>Tickets by Category</h5>
-                    <span class="badge bg-light text-muted border">Live Distribution</span>
+    <!-- Main Grid: Charts & Recent Activity -->
+    <div class="row g-3">
+        <!-- Left Column: Category Chart + Recent Tickets -->
+        <div class="col-lg-7 d-flex flex-column gap-3">
+            <!-- Category Chart Card -->
+            <div class="card border-0 shadow-sm rounded-3 flex-grow-1">
+                <div class="card-header bg-white border-0 pt-3 pb-1 d-flex justify-content-between align-items-center">
+                    <span class="fw-bold small text-dark"><i class="fa-solid fa-chart-column text-primary me-1"></i>Tickets by Category</span>
+                    <span class="badge bg-light text-muted border" style="font-size: 0.7rem;">Live</span>
                 </div>
-                <div class="card-body">
-                    <div class="chart-container" style="position: relative; height: 280px;">
+                <div class="card-body py-1 px-3">
+                    <div class="chart-container" style="position: relative; height: 185px;">
                         <canvas id="categoryChart"></canvas>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Priority & Sentiment Doughnuts -->
-        <div class="col-lg-6">
-            <div class="row g-4 h-100">
-                <div class="col-sm-6">
-                    <div class="card border-0 shadow-sm rounded-3 h-100">
-                        <div class="card-header bg-white border-0 pt-4 pb-0">
-                            <h6 class="fw-bold mb-0"><i class="fa-solid fa-gauge-high text-danger me-2"></i>Priority Distribution</h6>
-                        </div>
-                        <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                            <div class="chart-container" style="position: relative; height: 220px; width: 100%;">
-                                <canvas id="priorityChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Recent Tickets Card -->
+            <div class="card border-0 shadow-sm rounded-3">
+                <div class="card-header bg-white border-0 pt-3 pb-1 d-flex justify-content-between align-items-center">
+                    <span class="fw-bold small text-dark"><i class="fa-solid fa-clock-rotate-left text-primary me-1"></i>Recent Triaged Tickets</span>
+                    <a href="{{ url_for('history') }}" class="small text-decoration-none" style="font-size: 0.78rem;">View All <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
-
-                <div class="col-sm-6">
-                    <div class="card border-0 shadow-sm rounded-3 h-100">
-                        <div class="card-header bg-white border-0 pt-4 pb-0">
-                            <h6 class="fw-bold mb-0"><i class="fa-solid fa-face-smile text-success me-2"></i>Sentiment Analysis</h6>
-                        </div>
-                        <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                            <div class="chart-container" style="position: relative; height: 220px; width: 100%;">
-                                <canvas id="sentimentChart"></canvas>
-                            </div>
-                        </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-sm table-hover align-middle mb-0" style="font-size: 0.8rem;">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="ps-3" style="width: 50px;">ID</th>
+                                    <th>Query Preview</th>
+                                    <th>Category</th>
+                                    <th>Priority</th>
+                                    <th class="text-end pe-3">Sentiment</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if stats.recent_tickets %}
+                                    {% for t in stats.recent_tickets[:3] %}
+                                    <tr>
+                                        <td class="ps-3 font-monospace text-muted">#{{ t.id }}</td>
+                                        <td style="max-width: 220px;">
+                                            <div class="text-truncate fw-medium text-dark">{{ t.ticket_text }}</div>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill py-0" style="font-size: 0.7rem;">
+                                                {{ t.category }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            {% if t.priority == 'High' %}
+                                                <span class="badge bg-danger-subtle text-danger border border-danger-subtle rounded-pill py-0" style="font-size: 0.7rem;">High</span>
+                                            {% elif t.priority == 'Medium' %}
+                                                <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle rounded-pill py-0" style="font-size: 0.7rem;">Medium</span>
+                                            {% else %}
+                                                <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill py-0" style="font-size: 0.7rem;">Low</span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-end pe-3">
+                                            {% if t.sentiment == 'Negative' %}
+                                                <span class="text-danger fw-medium" style="font-size: 0.75rem;"><i class="fa-solid fa-face-frown me-1"></i>Neg</span>
+                                            {% elif t.sentiment == 'Positive' %}
+                                                <span class="text-success fw-medium" style="font-size: 0.75rem;"><i class="fa-solid fa-face-smile me-1"></i>Pos</span>
+                                            {% else %}
+                                                <span class="text-secondary fw-medium" style="font-size: 0.75rem;"><i class="fa-solid fa-face-meh me-1"></i>Neu</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="5" class="text-center py-2 text-muted">No tickets yet.</td>
+                                    </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Recent Tickets Table -->
-    <div class="card border-0 shadow-sm rounded-3 mb-4">
-        <div class="card-header bg-white border-0 pt-4 pb-3 d-flex justify-content-between align-items-center">
-            <div>
-                <h5 class="fw-bold mb-1"><i class="fa-solid fa-clock-rotate-left text-primary me-2"></i>Recently Analyzed Tickets</h5>
-                <p class="text-muted small mb-0">Latest customer support queries triaged by the system.</p>
+        <!-- Right Column: Priority & Sentiment Doughnuts -->
+        <div class="col-lg-5 d-flex flex-column gap-3">
+            <!-- Priority Distribution Card -->
+            <div class="card border-0 shadow-sm rounded-3 flex-fill">
+                <div class="card-header bg-white border-0 pt-3 pb-0">
+                    <span class="fw-bold small text-dark"><i class="fa-solid fa-gauge-high text-danger me-1"></i>Priority Breakdown</span>
+                </div>
+                <div class="card-body p-2 d-flex align-items-center justify-content-center">
+                    <div class="chart-container" style="position: relative; height: 145px; width: 100%;">
+                        <canvas id="priorityChart"></canvas>
+                    </div>
+                </div>
             </div>
-            <a href="{{ url_for('history') }}" class="btn btn-outline-primary btn-sm rounded-pill px-3">
-                View All <i class="fa-solid fa-arrow-right ms-1"></i>
-            </a>
-        </div>
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0">
-                    <thead class="table-light">
-                        <tr>
-                            <th class="ps-4">ID</th>
-                            <th>Customer Query</th>
-                            <th>Category</th>
-                            <th>Priority</th>
-                            <th>Sentiment</th>
-                            <th>Analyzed At</th>
-                            <th class="text-end pe-4">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% if stats.recent_tickets %}
-                            {% for t in stats.recent_tickets %}
-                            <tr>
-                                <td class="ps-4 fw-mono text-muted">#{{ t.id }}</td>
-                                <td style="max-width: 320px;">
-                                    <div class="text-truncate fw-medium text-dark">{{ t.ticket_text }}</div>
-                                </td>
-                                <td>
-                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill">
-                                        {{ t.category }}
-                                    </span>
-                                </td>
-                                <td>
-                                    {% if t.priority == 'High' %}
-                                        <span class="badge bg-danger-subtle text-danger border border-danger-subtle rounded-pill"><i class="fa-solid fa-circle-exclamation me-1"></i>High</span>
-                                    {% elif t.priority == 'Medium' %}
-                                        <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle rounded-pill"><i class="fa-solid fa-clock me-1"></i>Medium</span>
-                                    {% else %}
-                                        <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill"><i class="fa-solid fa-check me-1"></i>Low</span>
-                                    {% endif %}
-                                </td>
-                                <td>
-                                    {% if t.sentiment == 'Negative' %}
-                                        <span class="text-danger small fw-medium"><i class="fa-solid fa-face-frown me-1"></i>Negative</span>
-                                    {% elif t.sentiment == 'Positive' %}
-                                        <span class="text-success small fw-medium"><i class="fa-solid fa-face-smile me-1"></i>Positive</span>
-                                    {% else %}
-                                        <span class="text-secondary small fw-medium"><i class="fa-solid fa-face-meh me-1"></i>Neutral</span>
-                                    {% endif %}
-                                </td>
-                                <td class="text-muted small">{{ t.created_at }}</td>
-                                <td class="text-end pe-4">
-                                    <a href="{{ url_for('history') }}?search={{ t.ticket_text[:20] }}" class="btn btn-sm btn-light border rounded-pill px-2" title="Inspect">
-                                        <i class="fa-solid fa-eye text-primary"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        {% else %}
-                            <tr>
-                                <td colspan="7" class="text-center py-4 text-muted">
-                                    <i class="fa-solid fa-inbox fa-2x mb-2 d-block text-secondary"></i>
-                                    No tickets analyzed yet. <a href="{{ url_for('analyze') }}">Analyze your first ticket</a>.
-                                </td>
-                            </tr>
-                        {% endif %}
-                    </tbody>
-                </table>
+
+            <!-- Sentiment Distribution Card -->
+            <div class="card border-0 shadow-sm rounded-3 flex-fill">
+                <div class="card-header bg-white border-0 pt-3 pb-0">
+                    <span class="fw-bold small text-dark"><i class="fa-solid fa-face-smile text-success me-1"></i>Sentiment Analysis</span>
+                </div>
+                <div class="card-body p-2 d-flex align-items-center justify-content-center">
+                    <div class="chart-container" style="position: relative; height: 145px; width: 100%;">
+                        <canvas id="sentimentChart"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
