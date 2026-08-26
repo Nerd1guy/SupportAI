@@ -40,6 +40,15 @@ ENV/
 instance/*.db
 *.sqlite3
 
+# Document / Report files (Exclude all docx & pdf reports)
+*.docx
+*.pdf
+report_assets/
+pdf_extracted/
+extracted_assets/
+pdf_pages/
+certificate_veer_patel.png
+
 # Temporary / Scratch generation scripts
 inspect_doc.py
 verify_report.py
@@ -47,7 +56,3 @@ capture_screenshots.py
 generate_diagrams.py
 generate_extra_assets.py
 build_full_report_docx.py
-pdf_extracted/
-extracted_assets/
-pdf_pages/
-certificate_veer_patel.png
